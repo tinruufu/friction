@@ -1,0 +1,61 @@
+.pswp__top-bar, .pswp__caption {
+  background: none !important;
+}
+
+body {
+  margin:0;
+  overflow:hidden;
+}
+
+#wrapper {
+  position: absolute;
+  top: -100vw;
+  height: 100vw;
+  width: 100vh;
+  overflow: auto;
+}
+
+#wrapper.rot-right {
+  transform: rotate(90deg);
+  transform-origin: bottom left;
+}
+
+#wrapper.rot-left {
+  transform: rotate(270deg);
+  right: 0;
+  transform-origin: bottom right;
+}
+
+#settings-toggle {
+  display: block;
+  opacity: 0;
+  cursor: pointer;
+}
+
+#settings-toggle:hover {
+  opacity: 1;
+}
+
+#settings, #settings-toggle {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: .4em;
+  z-index: 5000;
+  padding: 0.5em;
+  position: absolute;
+  bottom: .5em;
+  left: .5em;
+}
+
+#settings {
+  display: none;
+  bottom: 3em;
+}
+
+#settings.shown {
+  display: block;
+}
+
+p {
+  padding: .25em 0;
+  margin: 0;
+}

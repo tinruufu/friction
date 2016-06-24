@@ -1,0 +1,4 @@
+include README.md
+include LICENSE
+recursive-include friction/static *.css *.js *.svg *.gif *.png LICENSE
+recursive-include friction/templates *.html
