@@ -99,9 +99,9 @@ files that aren't in the library, but making this thing safe from attackers is
 not my priority, so i offer no guarantees
 
 it'd also be pretty easy to DOS your server if you have a large library of
-archives, since friction extracts archived manga to a temporary directory
-indefinitely, and you could very well run out of space if someone continually
-reloads for a while
+archives, since friction extracts archived manga to a temporary directory and
+only removes them when you quit, so you could very well run out of space if
+someone continually reloads for a while
 
 ## thanks to
 
