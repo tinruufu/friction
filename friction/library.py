@@ -112,7 +112,7 @@ class Library:
 
     def delete_caches(self):
         if self.cached_extractions:
-            print('deleting cached archive extractions, hang on a sec')
+            print('deleting cached archive extractions, hang on a sec...')
             for dirname in self.cached_extractions:
                 rmtree(dirname)
 
