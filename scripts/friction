@@ -10,7 +10,7 @@ if __name__ == '__main__':
     werkzeug_logger.setLevel(logging.WARNING)
 
     host = environ.get('FH', '127.0.0.1')
-    port = environ.get('FP', '5000')
+    port = int(environ.get('FP', '5000'))
 
     print('listening on http://{host}:{port}/, press ctrl+c to quit'
           .format(**locals()))
