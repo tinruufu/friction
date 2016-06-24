@@ -46,8 +46,8 @@ your library can be structured and nested however you like, but friction has a
 particular idea of what counts as a single manga, inspired by what i've
 encountered in batches of scans i've seen
 
-basically, one manga is either a flat directory containing images or a zip/rar
-archive containing images in any structure
+basically, one manga is either a flat directory containing images or a
+zip/rar/cbz/cbr archive containing images in any structure
 
 this precludes, for instance, archives that contain other archives, as i've not
 seen anyone distributing scans in such a format with any regularity
