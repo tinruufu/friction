@@ -57,11 +57,11 @@ class Library:
 
             name, ext = os.path.splitext(entry.name)
 
-            if ext in IMAGE_EXTS:
+            if ext.lower() in IMAGE_EXTS:
                 self.add_choice(path)
                 break
 
-            if ext in ARCHIVE_EXTS:
+            if ext.lower() in ARCHIVE_EXTS:
                 self.add_choice(entry.path)
                 pass
 
@@ -81,7 +81,7 @@ class Library:
         else:
             ext = os.path.splitext(path)[1]
             target = mkdtemp()
-            ARCHIVE_EXTS[ext](full_path, target)
+            ARCHIVE_EXTS[ext.lower()](full_path, target)
             doujin = Doujin(path, target, recursive=True)
 
         self.doujin_cache[path] = doujin
@@ -108,7 +108,7 @@ class Library:
 class Doujin:
     def scan_dir(self, path, recursive):
         for f in os.scandir(path):
-            if os.path.splitext(f.name)[1] in IMAGE_EXTS:
+            if os.path.splitext(f.name)[1].lower() in IMAGE_EXTS:
                 self.pages.append(f.path)
             elif recursive and f.is_dir():
                 self.scan_dir(f.path, recursive)
