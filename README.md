@@ -76,7 +76,7 @@ this will be necessary if, for instance, you're wanting to use a phone or
 tablet or just a computer other than the one your library is on
 
 you _could_ mount the library on your local machine and then run friction
-locally, but it's pretty I/O heavy, so network storage is a huge bottlneck and
+locally, but it's pretty I/O heavy, so network storage is a huge bottleneck and
 it's gonna be dog slow if you do
 
 while there's no particular reason i can think of that'd make this dangerous,
