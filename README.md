@@ -103,6 +103,16 @@ archives, since friction extracts archived manga to a temporary directory and
 only removes them when you quit, so you could very well run out of space if
 someone continually reloads for a while
 
+## devs
+
+friction is a pretty simple flask app, and respects all the environment
+variables flask does, so if you want to develop locally, you can clone this
+repo, `python setup.py develop` and then run:
+
+```
+FLASK_DEBUG=true friction
+```
+
 ## thanks to
 
 - [flask](http://flask.pocoo.org)
