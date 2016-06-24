@@ -7,12 +7,22 @@ random
 
 - python 3.5 or newer (`os.scandir` is just too good)
 - unrar, which is probably available from your package manager as `unrar`
+- libjpeg and zlib (so that we can run [PIL][pil] and determine image
+  resolutions)
 - a directory full of porn manga (more details in 'caveats' below)
+
+[pil]: http://pillow.readthedocs.io/en/3.0.x/installation.html
 
 ## setup
 
 ```
 pip3 install friction
+```
+
+or, to upgrade from an older version:
+
+```
+pip3 install -U friction
 ```
 
 ## use
