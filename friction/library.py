@@ -1,7 +1,8 @@
-from random import choice
-from tempfile import mkdtemp
-import re
 import os
+from random import choice
+import re
+from shutil import rmtree
+from tempfile import mkdtemp
 from urllib.parse import urlencode
 from zipfile import ZipFile
 
@@ -31,6 +32,7 @@ class Library:
         self.doujin_cache = {}
         self._choices_list = None
         self.choices = set()
+        self.cached_extractions = set()
 
         self.root = root
         print('scanning {}...'.format(self.root))
@@ -84,6 +86,7 @@ class Library:
         else:
             ext = os.path.splitext(path)[1]
             target = mkdtemp()
+            self.cached_extractions.add(target)
             ARCHIVE_EXTS[ext.lower()](full_path, target)
             doujin = Doujin(path, target, recursive=True)
 
@@ -106,6 +109,12 @@ class Library:
             choices_list = self._choices_list
 
         return self.doujin_for(choice(choices_list))
+
+    def delete_caches(self):
+        if self.cached_extractions:
+            print('deleting cached archive extractions, hang on a sec')
+            for dirname in self.cached_extractions:
+                rmtree(dirname)
 
 
 class Doujin:

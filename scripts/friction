@@ -3,7 +3,7 @@
 from os import environ
 import logging
 
-from friction import app
+from friction import app, library
 
 if __name__ == '__main__':
     werkzeug_logger = logging.getLogger('werkzeug')
@@ -12,6 +12,11 @@ if __name__ == '__main__':
     host = environ.get('FH', '127.0.0.1')
     port = environ.get('FP', '5000')
 
-    print('listening on http://{host}:{port}'.format(**locals()))
+    print('listening on http://{host}:{port}, press ctrl+c to quit'
+          .format(**locals()))
 
-    app.run(host=host, port=port)
+    try:
+        app.run(host=host, port=port)
+    finally:
+        print()
+        library.delete_caches()
