@@ -20,7 +20,9 @@ def extract_rar(source, dest):
 IMAGE_EXTS = ['.png', '.jpeg', '.jpg']
 ARCHIVE_EXTS = {
     '.rar': extract_rar,
+    '.cbr': extract_rar,
     '.zip': extract_zip,
+    '.cbz': extract_zip,
 }
 
 
