@@ -2,9 +2,17 @@ var settingsElement = document.getElementById('settings');
 var settingsToggle = document.getElementById('settings-toggle');
 var filterElement = document.getElementById('filter');
 var submitElement = document.getElementById('submit');
+var messengerElement = document.getElementById('messenger');
 
 function handleItems() {
   var resp = JSON.parse(this.responseText);
+
+  if (this.status != 200) {
+    messengerElement.innerHTML = resp.message;
+    showSettings();
+    return;
+  }
+
   document.title = resp.title;
   var gallery = new PhotoSwipe(
       document.getElementById('pswp'),
