@@ -9,6 +9,7 @@ function handleItems() {
 
   if (this.status != 200) {
     messengerElement.innerHTML = resp.message;
+    document.title = 'sorry :<';
     showSettings();
     return;
   }
