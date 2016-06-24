@@ -95,7 +95,7 @@ class Library:
         if self._choices_list is None:
             self._choices_list = list(self.choices)
 
-        if f is not None:
+        if f:
             choices_list = [i for i in self._choices_list
                             if f.lower() in i.lower()]
             count = len(choices_list)
