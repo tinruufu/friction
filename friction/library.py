@@ -51,6 +51,9 @@ class Library:
 
     def scan_dir(self, path):
         for entry in os.scandir(path):
+            if entry.name.startswith('.'):
+                continue
+
             if entry.is_dir():
                 self.scan_dir(entry.path)
                 continue
@@ -108,7 +111,10 @@ class Library:
 class Doujin:
     def scan_dir(self, path, recursive):
         for f in os.scandir(path):
-            if os.path.splitext(f.name)[1].lower() in IMAGE_EXTS:
+            if (
+                (os.path.splitext(f.name)[1].lower() in IMAGE_EXTS) and
+                (not f.name.startswith('.'))
+            ):
                 self.pages.append(f.path)
             elif recursive and f.is_dir():
                 self.scan_dir(f.path, recursive)
