@@ -10,8 +10,8 @@ setup(
     name='friction',
     version='0.2',
     description=(
-        'a web-based gallery viewer tailored for viewing large collections '
-        'of pornographic manga'
+        'a browser-based gallery viewer tailored for viewing large '
+        'collections of pornographic manga'
     ),
     long_description=(
         'please visit the homepage: https://github.com/tinruufu/friction'
