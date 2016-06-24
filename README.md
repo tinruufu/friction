@@ -32,7 +32,8 @@ the page or scroll, and it'll pick another thing for you
 
 you can show a menu for filtering and rotation options by pressing o or
 clicking or tapping a link hidden in the bottom left of the screen (it'll
-appear when you hover over it)
+appear when you hover over it, on touch devices you'll just have to hit the
+bottom left corner blind)
 
 the filtering is pretty stupid, it just checks to see if your query is present
 in the file's path, ignoring case
