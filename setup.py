@@ -8,7 +8,7 @@ if version_info.major != 3 or version_info.minor < 5:
 
 setup(
     name='friction',
-    version='0.2',
+    version='0.3',
     description=(
         'a browser-based gallery viewer tailored for viewing large '
         'collections of pornographic manga'
