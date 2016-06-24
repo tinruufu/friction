@@ -40,13 +40,16 @@ device, or you can use your arrow keys
 when you want something new, hit enter or the little x in the corner or reload
 the page or scroll, and it'll pick another thing for you
 
-you can show a menu for filtering and rotation options by pressing o or
-clicking or tapping a link hidden in the bottom left of the screen (it'll
-appear when you hover over it, on touch devices you'll just have to hit the
-bottom left corner blind)
+if you have something in particular in mind, press o or tap/click at the bottom
+left of the screen and you'll get a menu with a field you can type into to
+filter what the choices are being made from. the filtering is pretty stupid, it
+just checks to see if your query is present in the file's path. it's case
+insensitive. on a computer with a keyboard, the intended workflow to change
+your filter is to hit o, type something, and hit enter
 
-the filtering is pretty stupid, it just checks to see if your query is present
-in the file's path, ignoring case
+the form that the filter field lives in also has rotation options, for if
+you're using a computer with an inappropriate aspect ratio or you're lying down
+or whatever
 
 ## caveats
 
