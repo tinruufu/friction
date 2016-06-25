@@ -8,13 +8,17 @@ library][archive] at <http://friction-demo.bot.nu/>
 
 [archive]: https://archive.org/details/manga_library
 
+hit enter or reload the page to see something new, more details in [use](#use)
+below
+
 ## prerequisites
 
 - python 3.5 or newer (`os.scandir` is just too good)
 - unrar, which is probably available from your package manager as `unrar`
 - libjpeg and zlib (so that we can run [PIL][pil] and determine image
   resolutions)
-- a directory full of porn manga (more details in 'caveats' below)
+- a directory full of porn manga (more details in [library
+  format](#library-format) below)
 
 [pil]: http://pillow.readthedocs.io/en/3.0.x/installation.html
 
