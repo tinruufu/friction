@@ -68,7 +68,6 @@ class Library:
 
             if ext.lower() in ARCHIVE_EXTS:
                 self.add_choice(entry.path)
-                pass
 
     def doujin_for(self, path):
         if path not in self.choices:
