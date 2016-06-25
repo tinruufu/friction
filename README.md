@@ -3,6 +3,11 @@
 a tool for viewing items from your massive collection of pornographic manga at
 random
 
+i'm hosting a demo instance using a few things from [archive.org's manga
+library][archive] at <http://friction-demo.bot.nu/>
+
+[archive]: https://archive.org/details/manga_library
+
 ## prerequisites
 
 - python 3.5 or newer (`os.scandir` is just too good)
