@@ -30,16 +30,23 @@ body {
 }
 
 #settings-toggle {
-  display: block;
   opacity: 0;
   cursor: pointer;
+  transition: opacity 1s;
 }
 
 #settings-toggle:hover {
   opacity: 1;
+  transition: opacity 0;
 }
 
+#settings-toggle.just-loaded, .settings-shown #settings-toggle {opacity: 1}
+.settings-shown #settings-toggle #show-text {display: none}
+#settings-toggle #hide-text {display: none}
+.settings-shown #settings-toggle #hide-text {display: inline}
+
 #settings, #settings-toggle {
+  display: block;
   color: #ddd;
   background-color: rgba(0, 0, 0, 0.8);
   border: 2px solid #ccc;
@@ -52,12 +59,12 @@ body {
 }
 
 #settings {
-  display: none;
+  opacity: 0;
   bottom: 3em;
 }
 
-#settings.shown {
-  display: block;
+.settings-shown #settings {
+  opacity: 1;
 }
 
 p {

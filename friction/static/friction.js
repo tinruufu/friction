@@ -1,4 +1,3 @@
-var settingsElement = document.getElementById('settings');
 var settingsToggle = document.getElementById('settings-toggle');
 var filterElement = document.getElementById('filter');
 var submitElement = document.getElementById('submit');
@@ -43,11 +42,11 @@ function getItems() {
 
 
 function toggleSettings() {
-  settingsElement.classList.toggle('shown');
+  document.body.classList.toggle('settings-shown');
 }
 
 function showSettings() {
-  if (!settingsElement.classList.contains('shown')) toggleSettings();
+  if (!document.body.classList.contains('settings-shown')) toggleSettings();
   filterElement.focus();
 }
 
@@ -59,5 +58,9 @@ settingsToggle.addEventListener('click', function(e) {
   toggleSettings();
   e.preventDefault();
 });
+
+setTimeout(function() {
+  settingsToggle.classList.remove('just-loaded');
+}, 1000);
 
 getItems();
