@@ -118,7 +118,7 @@ class Library:
 
 class Doujin:
     def scan_dir(self, path, recursive):
-        for f in os.scandir(path):
+        for f in sorted(os.scandir(path), key=lambda di: di.path):
             if (
                 (os.path.splitext(f.name)[1].lower() in IMAGE_EXTS) and
                 (not f.name.startswith('.'))
