@@ -4,7 +4,7 @@ a tool for viewing items from your massive collection of pornographic manga at
 random
 
 i'm hosting a demo instance using a few things from [archive.org's manga
-library][archive] at <http://friction-demo.bot.nu/>
+library][archive] at <http://friction.tinruufu.bot.nu/>
 
 [archive]: https://archive.org/details/manga_library
 
