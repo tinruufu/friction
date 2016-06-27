@@ -98,19 +98,18 @@ this will be necessary if, for instance, you're wanting to use a phone or
 tablet or just a computer other than the one your library is on
 
 you _could_ mount the library on your local machine and then run friction
-locally, but it's pretty I/O heavy, so network storage is a huge bottleneck and
-it's gonna be dog slow if you do
+locally, but friction is pretty I/O heavy, and network storage is slow, so
+you're gonna be waiting at the load screen a lot
 
-while there's no particular reason i can think of that'd make this dangerous,
 i'd advise caution if you intend to host friction to untrusted third parties,
 for instance on the public web. i've made effort to protect against access to
-files that aren't in the library, but making this thing safe from attackers is
-not my priority, so i offer no guarantees
+files that aren't in the library, and im happy enough with that that im hosting
+[my own instance][demo]. with large libraries and long uptimes, though, it'd be
+pretty easy to DOS a server, since friction extracts archives to a temporary
+directory and only removes them when you quit. if your library is all
+directories and no archives, though, you should be fine
 
-it'd also be pretty easy to DOS your server if you have a large library of
-archives, since friction extracts archived manga to a temporary directory and
-only removes them when you quit, so you could very well run out of space if
-someone continually reloads for a while
+[demo]: http://friction.tinruufu.bot.nu
 
 ## devs
 
