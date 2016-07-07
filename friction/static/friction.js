@@ -1,5 +1,6 @@
 var settingsToggle = document.getElementById('settings-toggle');
 var filterElement = document.getElementById('filter');
+var rtl = document.getElementById('rtl').checked;
 var submitElement = document.getElementById('submit');
 var messengerElement = document.getElementById('messenger');
 
@@ -13,6 +14,13 @@ function handleItems() {
     return;
   }
 
+  var index = 0;
+
+  if (rtl) {
+    resp.photoswipe.reverse();
+    index = resp.photoswipe.length - 1;
+  }
+
   document.title = resp.title;
   var gallery = new PhotoSwipe(
       document.getElementById('pswp'),
@@ -22,9 +30,11 @@ function handleItems() {
         spacing: 0,
         history: false,
         escKey: true,
-        barsSize: {top: 0, bottom: 0}
+        barsSize: {top: 0, bottom: 0},
+        index: index
       }
   );
+
   gallery.listen('close', function() {submitElement.click();});
   window.addEventListener('keypress', function(e) {
     if (e.keyCode == 13) submitElement.click();

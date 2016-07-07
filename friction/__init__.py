@@ -21,6 +21,7 @@ def viewer():
         'viewer.html',
         rotation=request.args.get('r'),
         filter=request.args.get('f', ''),
+        rtl=request.args.get('rtl', ''),
     )
 
 
