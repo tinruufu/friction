@@ -8,7 +8,7 @@ library][archive] at <http://friction.tinruufu.bot.nu/>
 
 [archive]: https://archive.org/details/manga_library
 
-hit enter or close the gallery (with the x or by scrolling vertically) to
+hit enter or close the gallery (with the x or by scrolling vertically) to get
 something new, more details in [use](#use) below
 
 ## prerequisites
@@ -118,7 +118,7 @@ directories and no archives, though, you should be fine
 
 friction is a pretty simple flask app, and respects all the environment
 variables flask does, so if you want to develop locally, you can clone this
-repo, `python setup.py develop` and then run:
+repo, `python setup.py develop`, and then run:
 
 ```
 FLASK_DEBUG=true friction
