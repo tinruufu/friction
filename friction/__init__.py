@@ -1,4 +1,5 @@
 import os
+from base64 import b32encode
 
 from flask import Flask, render_template, request, send_file, jsonify
 
@@ -19,7 +20,7 @@ def viewer():
 
         # needed just to prevent browsers from thinking the page has stayed the
         # same:
-        salt=os.urandom(4),
+        salt=b32encode(os.urandom(2)).decode('utf-8').rstrip('='),
     )
 
 
