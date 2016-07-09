@@ -35,7 +35,6 @@ def items():
 
     if doujin is None:
         raise FrictionError(
-            400,
             "couldn't find anything in the library matching your filter; try "
             "being less specific"
         )

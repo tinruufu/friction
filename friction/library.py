@@ -28,7 +28,7 @@ ARCHIVE_EXTS = {
 
 
 class FrictionError(Exception):
-    def __init__(self, status, message):
+    def __init__(self, message, status=400):
         super().__init__()
         self.status_code = status
         self.message = message
@@ -139,6 +139,9 @@ class Doujin:
         self.full_path = full_path
         self.pages = []
         self.scan_dir(full_path, recursive)
+        if not self.pages:
+            raise FrictionError('there are no images in <code>{}</code>'
+                                .format(path))
         self.photoswipe_items = []
 
         for i, page in enumerate(self.pages):
