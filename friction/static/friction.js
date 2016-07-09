@@ -1,17 +1,23 @@
 var settingsToggle = document.getElementById('settings-toggle');
 var filterElement = document.getElementById('filter');
+var idElement = document.getElementById('id');
 var rtl = document.getElementById('rtl').checked;
 var submitElement = document.getElementById('submit');
 var messengerElement = document.getElementById('messenger');
 
 function handleItems() {
   var resp = JSON.parse(this.responseText);
+  messengerElement.innerHTML = '';
 
   if (this.status != 200) {
     messengerElement.innerHTML = resp.message;
     document.title = 'sorry :<';
     showSettings();
     return;
+  }
+
+  if (!idElement.value) {
+    window.history.replaceState({}, resp.title, window.location.pathname + '?id=' + resp.id + '&' + window.location.search.replace(/^\?/, ''));
   }
 
   var index = 0;
@@ -35,21 +41,35 @@ function handleItems() {
       }
   );
 
-  gallery.listen('close', function() {submitElement.click();});
+  gallery.listen('close', function() {submitForm();});
   window.addEventListener('keypress', function(e) {
-    if (e.keyCode == 13) submitElement.click();
+    if (e.keyCode == 13) submitForm();
   });
   gallery.init();
 }
 
+// *some* browsers won't let us submit the form unless we change something, so,,
+function changeForm() {
+  filterElement.value += ' ';
+}
+
+function submitForm() {
+  changeForm();
+  submitElement.click();
+}
+
 function getItems() {
+  var url;
+
+  if (idElement.value) url = '/items?id=' + encodeURIComponent(idElement.value);
+  else url = '/items?f=' + encodeURIComponent(filterElement.value);
+
   var itemsRequest = new XMLHttpRequest();
   document.title = 'loading';
   itemsRequest.addEventListener('load', handleItems);
-  itemsRequest.open('GET', '/items?f=' + encodeURIComponent(filterElement.value));
+  itemsRequest.open('GET', url);
   itemsRequest.send();
 }
-
 
 function toggleSettings() {
   document.body.classList.toggle('settings-shown');

@@ -8,8 +8,8 @@ library][archive] at <http://friction.tinruufu.bot.nu/>
 
 [archive]: https://archive.org/details/manga_library
 
-hit enter or reload the page to see something new, more details in [use](#use)
-below
+hit enter or close the gallery (with the x or by scrolling vertically) to
+something new, more details in [use](#use) below
 
 ## prerequisites
 
@@ -46,8 +46,11 @@ then open <http://localhost:5000/> in your browser of choice
 for quick navigation between pages, you can swipe if you're on a touchscreen
 device, or you can use your arrow keys
 
-when you want something new, hit enter or the little x in the corner or reload
-the page or scroll, and it'll pick another thing for you
+when you want something new, hit enter or the little x in the corner or scroll,
+and it'll pick another thing for you
+
+if you do this accidentally, just hit back in your browser and you'll go back
+to the thing you were looking at before
 
 if you have something in particular in mind, press o or tap/click at the bottom
 left of the screen and you'll get a menu with a field you can type into to

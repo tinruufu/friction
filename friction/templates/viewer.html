@@ -62,13 +62,16 @@
       <span id="hide-text">hide settings</span>
     </a>
     <form id="settings">
+      <input type="hidden" name="id" value=""/>
+      <input type="hidden" name="salt" value="{{ salt }}"/>
+
       <p>
         <label for="filter">filter</label>
         <input id="filter" type="text" name="f" value="{{ filter }}"/>
       </p>
 
       <p>
-        <input id="rot-none" type="radio" name="r" value="" {% if not rotation %}checked{% endif %}/>
+        <input id="rot-none" type="radio" name="r" value="n" {% if rotation == "n" %}checked{% endif %}/>
         <label for="rot-none">no rotation</label>
         <input id="rot-right" type="radio" name="r" value="r" {% if rotation == "r" %}checked{% endif %}/>
         <label for="rot-right">rotate right</label>
@@ -85,6 +88,7 @@
         <input id="submit" type="submit" value="okay"/>
       </p>
     </form>
+    <input type="hidden" id="id" value="{{ id }}">
     <script src="/static/friction.js"></script>
   </body>
 </html>

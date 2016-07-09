@@ -2,32 +2,36 @@ import os
 
 from flask import Flask, render_template, request, send_file, jsonify
 
-from .library import Library
+from .library import Library, FrictionError
 
 app = Flask(__name__)
 library = Library(os.getcwd())
-
-
-class FrictionError(Exception):
-    def __init__(self, status, message):
-        super().__init__()
-        self.status_code = status
-        self.message = message
 
 
 @app.route('/')
 def viewer():
     return render_template(
         'viewer.html',
-        rotation=request.args.get('r'),
-        filter=request.args.get('f', ''),
+        rotation=request.args.get('r', 'n'),
+        filter=request.args.get('f', '').strip(),
         rtl=request.args.get('rtl', ''),
+        id=request.args.get('id', ''),
+
+        # needed just to prevent browsers from thinking the page has stayed the
+        # same:
+        salt=os.urandom(4),
     )
 
 
 @app.route('/items')
 def items():
-    doujin = library.choice(request.args['f'])
+    identifier = request.args.get('id', None)
+
+    if identifier is not None:
+        doujin = library.doujin_for(identifier)
+    else:
+        doujin = library.choice(request.args.get('f', '').strip())
+
     if doujin is None:
         raise FrictionError(
             400,
