@@ -10,6 +10,16 @@ body {
   background-color: #222;
 }
 
+a {
+  text-decoration: none;
+  color: #d6d;
+}
+
+a:hover {
+  border-bottom: 1px dotted #d6d;
+  color: inherit;
+}
+
 #wrapper {
   position: absolute;
   top: -100vw;

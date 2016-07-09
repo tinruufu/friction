@@ -6,8 +6,14 @@ var submitElement = document.getElementById('submit');
 var messengerElement = document.getElementById('messenger');
 
 function handleItems() {
-  var resp = JSON.parse(this.responseText);
   messengerElement.innerHTML = '';
+
+  if (this.status >= 500) {
+    document.title = 'aww jeez';
+    messengerElement.innerHTML = "sorry, something bad happened<br/><br/>the server has probably printed or logged more information<br/><br/>it'd be very nice if you could <a href='https://github.com/tinruufu/friction/issues'>file a bug</a> about this";
+  }
+
+  var resp = JSON.parse(this.responseText);
 
   if (this.status != 200) {
     messengerElement.innerHTML = resp.message;
