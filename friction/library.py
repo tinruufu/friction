@@ -27,6 +27,13 @@ ARCHIVE_EXTS = {
 }
 
 
+class FrictionError(Exception):
+    def __init__(self, message, status=400):
+        super().__init__()
+        self.status_code = status
+        self.message = message
+
+
 class Library:
     def __init__(self, root):
         self.doujin_cache = {}
@@ -71,7 +78,7 @@ class Library:
 
     def doujin_for(self, path):
         if path not in self.choices:
-            raise RuntimeError('sneaky')
+            raise FrictionError('nothing by that name, sorry')
 
         doujin = self.doujin_cache.get(path)
 
@@ -132,6 +139,9 @@ class Doujin:
         self.full_path = full_path
         self.pages = []
         self.scan_dir(full_path, recursive)
+        if not self.pages:
+            raise FrictionError('there are no images in <code>{}</code>'
+                                .format(path))
         self.photoswipe_items = []
 
         for i, page in enumerate(self.pages):
@@ -147,6 +157,7 @@ class Doujin:
 
     def json(self):
         return {
+            'id': self.path,
             'title': os.path.basename(self.path),
             'photoswipe': self.photoswipe_items,
         }
