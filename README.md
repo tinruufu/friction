@@ -11,7 +11,7 @@ library][archive] at <http://friction.tinruufu.bot.nu/>
 hit enter or close the gallery (with the x or by scrolling vertically) to get
 something new, more details in [use](#use) below
 
-## prerequisites
+## requirements
 
 - python 3.5 or newer (`os.scandir` is just too good)
 - unrar, which is probably available from your package manager as `unrar`
