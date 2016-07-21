@@ -74,11 +74,13 @@ code {
 
 #settings {
   opacity: 0;
+  pointer-events: none;
   bottom: 3em;
 }
 
 .settings-shown #settings {
   opacity: 1;
+  pointer-events: auto;
 }
 
 p {

@@ -20,7 +20,7 @@ something new, more details in [use](#use) below
 - quick filtering, just in case you're in the mood for something specific
 - right-to-left layout, just in case you're a weeb nerd
 
-## prerequisites
+## requirements
 
 - python 3.5 or newer (`os.scandir` is just too good)
 - unrar, which is probably available from your package manager as `unrar`
