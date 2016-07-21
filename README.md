@@ -1,4 +1,4 @@
-z friction
+# friction
 
 a tool for viewing items from your massive collection of pornographic manga at
 random
