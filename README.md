@@ -4,7 +4,7 @@ a tool for viewing items from your massive collection of pornographic manga at
 random
 
 i'm hosting a demo instance using a few things from [archive.org's manga
-library][archive] at <http://friction.tinruufu.bot.nu/>
+library][archive] at <https://friction.tinruufu.bot.nu/>
 
 [archive]: https://archive.org/details/manga_library
 
@@ -112,7 +112,7 @@ pretty easy to DOS a server, since friction extracts archives to a temporary
 directory and only removes them when you quit. if your library is all
 directories and no archives, though, you should be fine
 
-[demo]: http://friction.tinruufu.bot.nu
+[demo]: https://friction.tinruufu.bot.nu
 
 ## devs
 
