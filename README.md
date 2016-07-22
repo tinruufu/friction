@@ -11,6 +11,17 @@ library][archive] at <https://friction.tinruufu.bot.nu/>
 hit enter or close the gallery (with the x or by scrolling vertically) to get
 something new, more details in [use](#use) below
 
+## features
+
+- can scan a library of thousands of mangas in less than a second
+- handles mangas saved as directories full of images, or as .rar/cbr or
+  .zip/cbz archives
+- support for keyboard shortcuts and touch devices via [photoswipe]
+- in-browser rotation, just in case you're lying down and using a widescreen
+  laptop
+- quick filtering, just in case you're in the mood for something specific
+- right-to-left layout, just in case you're a weeb nerd
+
 ## requirements
 
 - python 3.5 or newer (`os.scandir` is just too good)
@@ -46,8 +57,8 @@ then open <http://localhost:5000/> in your browser of choice
 for quick navigation between pages, you can swipe if you're on a touchscreen
 device, or you can use your arrow keys
 
-when you want something new, hit enter or the little x in the corner or scroll,
-and it'll pick another thing for you
+when you want something new, hit enter or swipe vertically and it'll pick
+another thing for you
 
 if you do this accidentally, just hit back in your browser and you'll go back
 to the thing you were looking at before
