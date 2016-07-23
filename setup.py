@@ -23,7 +23,12 @@ setup(
     scripts=['scripts/friction'],
     license='MIT',
     platforms=['any'],
-    install_requires=['flask>=0.11,<0.12', 'pillow', 'rarfile'],
+    install_requires=[
+        'flask>=0.11,<0.12',
+        'pillow',
+        'python-magic',
+        'rarfile',
+    ],
     classifiers=[
         'Intended Audience :: End Users/Desktop',
         'Topic :: Multimedia :: Graphics :: Viewers',

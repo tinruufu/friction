@@ -4,10 +4,17 @@ import re
 from shutil import rmtree
 from tempfile import mkdtemp
 from urllib.parse import urlencode
-from zipfile import ZipFile
+from zipfile import ZipFile, BadZipFile
 
 from PIL import Image
-from rarfile import RarFile
+from rarfile import RarFile, NotRarFile
+
+try:
+    from magic import from_file
+except ImportError as e:
+    magic_imported = False
+else:
+    magic_imported = True
 
 
 def extract_zip(source, dest):
@@ -18,12 +25,20 @@ def extract_rar(source, dest):
     RarFile(source).extractall(dest)
 
 
+RAR = 'application/x-rar'
+ZIP = 'application/zip'
+
 IMAGE_EXTS = ['.png', '.jpeg', '.jpg']
 ARCHIVE_EXTS = {
-    '.rar': extract_rar,
-    '.cbr': extract_rar,
-    '.zip': extract_zip,
-    '.cbz': extract_zip,
+    '.rar': RAR,
+    '.cbr': RAR,
+    '.zip': ZIP,
+    '.cbz': ZIP,
+}
+
+ARCHIVE_HANDLERS = {
+    RAR: extract_rar,
+    ZIP: extract_zip,
 }
 
 
@@ -90,10 +105,30 @@ class Library:
         if os.path.isdir(full_path):
             doujin = Doujin(path, full_path)
         else:
-            ext = os.path.splitext(path)[1]
             target = mkdtemp()
             self.cached_extractions.add(target)
-            ARCHIVE_EXTS[ext.lower()](full_path, target)
+
+            if magic_imported:
+                mime = from_file(full_path, mime=True)
+                if mime not in ARCHIVE_HANDLERS:
+                    raise FrictionError(
+                        '<code>{}</code> is not an archive we support'
+                        '<br/><br/>magic thinks it looks like <code>{}</code>'
+                        .format(path, mime)
+                    )
+            else:
+                mime = ARCHIVE_EXTS[os.path.splitext(path)[1]]
+
+            try:
+                ARCHIVE_HANDLERS[mime](full_path, target)
+            except (NotRarFile, BadZipFile):
+                raise FrictionError(
+                    '<code>{}</code> was not in format we expected{}'.format(
+                        path, '' if magic_imported else
+                        '<br/><br/>install libmagic if you keep running into '
+                        'this, see the readme for details'
+                    )
+                )
             doujin = Doujin(path, target, recursive=True)
 
         self.doujin_cache[path] = doujin

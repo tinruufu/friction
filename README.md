@@ -31,6 +31,11 @@ something new, more details in [use](#use) below
 - a directory full of porn manga (more details in [library
   format](#library-format) below)
 
+### optional extras:
+
+- magic (for improving archive file type detection), probably `magic` or
+  `libmagic` in your package manager
+
 [pil]: http://pillow.readthedocs.io/en/3.0.x/installation.html
 
 ## setup
