@@ -62,7 +62,7 @@ def items():
 
 @app.route('/item')
 def item():
-    doujin = library.doujin_for(request.args['path'])
+    doujin = library.doujin_for(request.args['identifier'])
     return send_file(doujin.pages[int(request.args['page'])])
 
 

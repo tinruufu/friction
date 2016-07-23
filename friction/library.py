@@ -1,3 +1,4 @@
+from hashlib import md5
 import os
 from random import choice
 import re
@@ -53,7 +54,7 @@ class Library:
     def __init__(self, root):
         self.doujin_cache = {}
         self._choices_list = None
-        self.choices = set()
+        self.choices = {}
         self.cached_extractions = set()
 
         self.root = root
@@ -69,9 +70,8 @@ class Library:
         print('i found {} things!'.format(len(self.choices)))
 
     def add_choice(self, path):
-        self.choices.add(
-            re.sub(r'^{}/'.format(re.escape(self.root)), '', path)
-        )
+        relpath = re.sub(r'^{}/'.format(re.escape(self.root)), '', path)
+        self.choices[md5(relpath.encode()).hexdigest()] = relpath
 
     def scan_dir(self, path):
         for entry in os.scandir(path):
@@ -91,9 +91,11 @@ class Library:
             if ext.lower() in ARCHIVE_EXTS:
                 self.add_choice(entry.path)
 
-    def doujin_for(self, path):
-        if path not in self.choices:
-            raise FrictionError('nothing by that name, sorry')
+    def doujin_for(self, identifier):
+        path = self.choices.get(identifier)
+
+        if path is None:
+            raise FrictionError('nothing by that identifier, sorry')
 
         doujin = self.doujin_cache.get(path)
 
@@ -103,7 +105,7 @@ class Library:
         print('reading {}'.format(path))
         full_path = os.path.join(self.root, path)
         if os.path.isdir(full_path):
-            doujin = Doujin(path, full_path)
+            doujin = Doujin(path, full_path, identifier)
         else:
             target = mkdtemp()
             self.cached_extractions.add(target)
@@ -129,7 +131,7 @@ class Library:
                         'this, see the readme for details'
                     )
                 )
-            doujin = Doujin(path, target, recursive=True)
+            doujin = Doujin(path, target, identifier, recursive=True)
 
         self.doujin_cache[path] = doujin
 
@@ -137,7 +139,7 @@ class Library:
 
     def choice(self, f=None):
         if self._choices_list is None:
-            self._choices_list = list(self.choices)
+            self._choices_list = list(self.choices.keys())
 
         if f:
             choices_list = [i for i in self._choices_list
@@ -170,7 +172,8 @@ class Doujin:
             elif recursive and f.is_dir():
                 self.scan_dir(f.path, recursive)
 
-    def __init__(self, path, full_path, recursive=False):
+    def __init__(self, path, full_path, identifier, recursive=False):
+        self.identifier = identifier
         self.path = path
         self.full_path = full_path
         self.pages = []
@@ -184,7 +187,7 @@ class Doujin:
             with Image.open(page) as pil:
                 self.photoswipe_items.append({
                     'src': '/item?{}'.format(urlencode({
-                        'path': self.path,
+                        'identifier': self.identifier,
                         'page': i,
                     })),
                     'w': pil.width,
@@ -193,7 +196,7 @@ class Doujin:
 
     def json(self):
         return {
-            'id': self.path,
+            'id': self.identifier,
             'title': os.path.basename(self.path),
             'photoswipe': self.photoswipe_items,
         }
