@@ -43,4 +43,12 @@ setup(
         'Programming Language :: Python :: 3 :: Only',
     ],
     include_package_data=True,
+    options={
+        'py2app': {
+            'iconfile': 'scripts/icon.icns',
+            'plist': {
+                'NSHumanReadableCopyright': '©2016 ティン・ルーフ'
+            },
+        }
+    },
 )
