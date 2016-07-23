@@ -1,3 +1,4 @@
+import signal
 import os
 from base64 import b32encode
 
@@ -5,8 +6,26 @@ from flask import Flask, render_template, request, send_file, jsonify
 
 from .library import Library, FrictionError
 
-app = Flask(__name__)
+
 library = Library(os.getcwd())
+
+
+def request_exit(*a):
+    library.delete_caches()
+    exit(0)
+
+
+class FrictionApp(Flask):
+    def run(self, *args, **kwargs):
+        signal.signal(signal.SIGTERM, request_exit)
+
+        try:
+            super().run(*args, **kwargs)
+        finally:
+            library.delete_caches()
+
+
+app = FrictionApp(__name__)
 
 
 @app.route('/')
