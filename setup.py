@@ -1,5 +1,6 @@
 # coding=utf-8
 
+import os
 from setuptools import setup
 from sys import version_info
 
@@ -20,7 +21,13 @@ setup(
     author='ティン・ルーフ',
     author_email='tinruufu+pypi@gmail.com',
     packages=['friction'],
-    scripts=['scripts/friction'],
+    scripts=[
+        os.path.join('scripts', 'friction'),
+        os.path.join('scripts', 'friction-ui'),
+    ],
+    app=[
+        os.path.join('scripts', 'friction-ui'),
+    ],
     license='MIT',
     platforms=['any'],
     install_requires=[

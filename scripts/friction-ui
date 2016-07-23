@@ -1,0 +1,58 @@
+#!/usr/bin/env python3
+
+import os
+import subprocess
+from tkinter import Tk, ttk, filedialog
+
+
+class FrictionUI(object):
+    def __init__(self):
+        self.server_process = None
+        self.library_directory = None
+
+        self.window = Tk()
+
+        self.window.title('friction')
+
+        frame = ttk.Frame(self.window)
+        ttk.Button(
+            frame, text='choose library', command=self.choose_library,
+        ).pack()
+        self.library_path_label = ttk.Label(frame)
+        self.run_toggle = ttk.Button(
+            frame, text='start', command=self.toggle_running
+        )
+        self.run_toggle.pack()
+
+        frame.pack()
+        self.choose_library()
+        self.window.mainloop()
+
+    def choose_library(self):
+        self.library_path = filedialog.askdirectory()
+        self.library_path_label.config(text=self.library_path)
+        self.library_path_label.pack()
+
+    def close_server(self):
+        self.server_process.terminate()
+        self.server_process.wait()
+        self.server_process = None
+
+    def toggle_running(self):
+        self.run_toggle.state(['disabled'])
+
+        if self.server_process is None:
+            self.run_toggle.config(text='stop')
+            self.server_process = subprocess.Popen([
+                os.path.join(os.path.dirname(__file__), 'friction')
+            ])
+        else:
+            self.run_toggle.config(text='start')
+            self.close_server()
+
+        self.run_toggle.state(['!disabled'])
+
+ui = FrictionUI()
+
+if ui.server_process is not None:
+    ui.close_server()
