@@ -47,7 +47,7 @@ setup(
         'py2app': {
             'iconfile': 'scripts/icon.icns',
             'plist': {
-                'NSHumanReadableCopyright': '©2016 ティン・ルーフ'
+                'NSHumanReadableCopyright': '©2016 ティン・ルーフ',
             },
         }
     },
