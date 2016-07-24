@@ -1,9 +1,12 @@
 var settingsToggle = document.getElementById('settings-toggle');
 var filterElement = document.getElementById('filter');
+var galleryElement = document.getElementById('pswp');
 var idElement = document.getElementById('id');
 var rtl = document.getElementById('rtl').checked;
 var submitElement = document.getElementById('submit');
 var messengerElement = document.getElementById('messenger');
+var gallery;
+var index;
 
 function handleItems() {
   messengerElement.innerHTML = '';
@@ -26,17 +29,19 @@ function handleItems() {
     window.history.replaceState({}, resp.title, window.location.pathname + '?id=' + resp.id + '&' + window.location.search.replace(/^\?/, ''));
   }
 
-  var index = 0;
-
-  if (rtl) {
-    resp.photoswipe.reverse();
-    index = resp.photoswipe.length - 1;
+  if (index === undefined) {
+    if (rtl) {
+      resp.photoswipe.reverse();
+      index = resp.photoswipe.length - 1;
+    } else {
+      index = 0;
+    }
   }
 
   document.title = resp.title;
-  var gallery = new PhotoSwipe(
-      document.getElementById('pswp'),
-      PhotoSwipeUI_Default, 
+  gallery = new PhotoSwipe(
+      galleryElement,
+      PhotoSwipeUI_Default,
       resp.photoswipe,
       {
         spacing: 0,
@@ -47,7 +52,12 @@ function handleItems() {
       }
   );
 
-  gallery.listen('close', function() {submitForm();});
+  function updateIndex() {
+    index = gallery.getCurrentIndex();
+  }
+
+  gallery.listen('beforeChange', updateIndex);
+  gallery.listen('destroy', function() {submitForm();});
   window.addEventListener('keypress', function(e) {
     if (e.keyCode == 13) submitForm();
   });
@@ -88,6 +98,12 @@ function showSettings() {
 
 window.addEventListener('keyup', function(e) {
   if (e.keyCode == 79) showSettings();
+});
+
+window.addEventListener('pageshow', function() {
+  if ((gallery !== undefined) && !(galleryElement.classList.contains('pwsp--open'))) {
+    getItems();
+  }
 });
 
 settingsToggle.addEventListener('click', function(e) {
