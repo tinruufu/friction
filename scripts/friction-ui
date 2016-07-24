@@ -84,11 +84,15 @@ class FrictionUI(object):
 
     def choose_library(self):
         self.choose_library_button.state(['disabled'])
-        while not self.library_path:
-            self.library_path = filedialog.askdirectory()
+        new_library_path = filedialog.askdirectory()
+        self.choose_library_button.state(['!disabled'])
+
+        if new_library_path:
+            self.library_path = new_library_path
+        else:
+            return
 
         self.run_toggle.state(['!disabled'])
-        self.choose_library_button.state(['!disabled'])
 
         self.library_path_label.config(text=self.library_path)
 
