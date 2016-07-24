@@ -139,11 +139,11 @@ class Library:
 
     def choice(self, f=None):
         if self._choices_list is None:
-            self._choices_list = list(self.choices.keys())
+            self._choices_list = list(self.choices.items())
 
         if f:
             choices_list = [i for i in self._choices_list
-                            if f.lower() in i.lower()]
+                            if f.lower() in i[1].lower()]
             count = len(choices_list)
             if count == 0:
                 return
@@ -151,7 +151,7 @@ class Library:
         else:
             choices_list = self._choices_list
 
-        return self.doujin_for(choice(choices_list))
+        return self.doujin_for(choice(choices_list)[0])
 
     def delete_caches(self):
         if self.cached_extractions:
