@@ -1,12 +1,8 @@
 #!/usr/bin/env python3
 
-import os
 import subprocess
-from tkinter import Tk, ttk, filedialog
-
-
-def _prime_app():
-    import friction  # noqa
+import os
+from tkinter import Tk, ttk, filedialog, StringVar, messagebox
 
 
 class FrictionUI(object):
@@ -19,50 +15,122 @@ class FrictionUI(object):
         self.window.title('friction')
         self.window.createcommand('exit', self.handle_exit)
 
-        frame = ttk.Frame(self.window)
-        ttk.Button(
-            frame, text='choose library', command=self.choose_library,
-        ).pack()
-        self.library_path_label = ttk.Label(frame)
+        frame = ttk.Frame(self.window, padding='30 10 30 10')
+        frame.grid(column=0, row=0, sticky=['n', 'e', 'w', 's'])
+
+        self.make_library_ui(frame)
+        self.make_listen_ui(frame)
+
         self.run_toggle = ttk.Button(
             frame, text='start', command=self.toggle_running
         )
-        self.run_toggle.pack()
+        self.run_toggle.grid(column=1, row=4, sticky='e')
+        self.run_toggle.state(['disabled'])
 
-        frame.pack()
-        self.choose_library()
         self.window.mainloop()
 
+    def poll_server(self):
+        if (
+            self.server_process is not None and
+            self.server_process.poll() is None
+        ):
+            self.window.after(1000, self.poll_server)
+        else:
+            self.notify_exit()
+
+    def make_library_ui(self, frame):
+        self.choose_library_button = ttk.Button(
+            frame, text='choose library', command=self.choose_library,
+        )
+        self.choose_library_button.grid(row=0)
+
+        self.library_path_label = ttk.Label(frame, text='choose a library')
+        self.library_path_label.grid(row=0, column=1)
+
+    def make_listen_ui(self, frame):
+        self.listen_address = StringVar()
+        self.listen_address.set('127.0.0.1')
+        ttk.Label(frame, text='available:').grid(row=1, column=0, sticky='e')
+
+        for row, address, label_name in [
+            (1, '127.0.0.1', 'just locally'),
+            (2, '0.0.0.0', 'network-wide'),
+        ]:
+            ttk.Radiobutton(
+                frame, text=label_name,
+                variable=self.listen_address, value=address
+            ).grid(row=row, column=1, sticky='w')
+
+        ttk.Label(frame, text='port:').grid(row=3, column=0, sticky='e')
+        self.port = StringVar()
+        self.port.set('5000')
+
+        def validate_int(value):
+            try:
+                int(value)
+            except ValueError:
+                print('invalid')
+                return False
+
+            print('valid')
+            return True
+
+        ttk.Entry(
+            frame, textvariable=self.port, validate='all',
+            validatecommand=(
+                frame.register(validate_int), '%P',
+            ),
+        ).grid(row=3, column=1)
+
     def choose_library(self):
+        self.choose_library_button.state(['disabled'])
         while not self.library_path:
             self.library_path = filedialog.askdirectory()
 
+        self.run_toggle.state(['!disabled'])
+        self.choose_library_button.state(['!disabled'])
+
         self.library_path_label.config(text=self.library_path)
-        self.library_path_label.pack()
 
     def close_server(self):
         self.server_process.terminate()
-        self.server_process.wait()
-        self.server_process = None
 
     def toggle_running(self):
         self.run_toggle.state(['disabled'])
 
         if self.server_process is None:
             self.run_toggle.config(text='stop')
+            env = dict(os.environ)
+            env.update({
+                'FH': self.listen_address.get(),
+                'FP': self.port.get(),
+            })
             self.server_process = subprocess.Popen(
                 [os.path.join(os.path.dirname(__file__), 'friction')],
                 cwd=self.library_path,
+                env=env,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.STDOUT,
             )
+            self.run_toggle.state(['!disabled'])
+            self.poll_server()
         else:
-            self.run_toggle.config(text='start')
             self.close_server()
 
+    def notify_exit(self):
+        if self.server_process.returncode != 0:
+            messagebox.showerror(
+                title='the server broke :<',
+                message=self.server_process.stdout.read(),
+            )
         self.run_toggle.state(['!disabled'])
+        self.run_toggle.configure(text='start')
+        self.server_process = None
 
     def handle_exit(self):
         if self.server_process is not None:
             self.close_server()
         self.window.destroy()
 
-ui = FrictionUI()
+if __name__ == '__main__':
+    FrictionUI()

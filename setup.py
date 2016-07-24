@@ -36,6 +36,9 @@ setup(
         'python-magic',
         'rarfile',
     ],
+    setup_requires=[
+        'py2app',
+    ],
     classifiers=[
         'Intended Audience :: End Users/Desktop',
         'Topic :: Multimedia :: Graphics :: Viewers',
