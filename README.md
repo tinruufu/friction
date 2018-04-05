@@ -71,7 +71,7 @@ to the thing you were looking at before
 
 if you have something in particular in mind, press o or tap/click at the bottom
 left of the screen and you'll get a menu with a field you can type into to
-filter what the choices are being made from. the filtering is pretty stupid, it
+filter what the choices are being made from. the filtering is pretty basic, it
 just checks to see if your query is present in the file's path. it's case
 insensitive. on a computer with a keyboard, the intended workflow to change
 your filter is to hit o, type something, and hit enter
