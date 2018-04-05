@@ -3,8 +3,9 @@
 a tool for viewing items from your massive collection of pornographic manga at
 random
 
-i'm hosting a demo instance using a few things from [archive.org's manga
-library][archive] at <https://friction.tinruufu.bot.nu/>
+i used to host a demo instance using a few things from [archive.org's manga
+library][archive], but i currently don't have access to a server i can do that
+with, sorry :<
 
 [archive]: https://archive.org/details/manga_library
 
@@ -116,15 +117,12 @@ FH=0.0.0.0 FP=8009 friction
 this will be necessary if, for instance, you're wanting to use a phone or
 tablet or just a computer other than the one your library is on
 
-you _could_ mount the library on your local machine and then run friction
-locally, but friction is pretty I/O heavy, and network storage is slow, so
-you're gonna be waiting at the load screen a lot
-
 i'd advise caution if you intend to host friction to untrusted third parties,
 for instance on the public web. i've made effort to protect against access to
-files that aren't in the library, and im happy enough with that that im hosting
-[my own instance][demo]. with large libraries and long uptimes, though, it'd be
-pretty easy to DOS a server, since friction extracts archives to a temporary
+files that aren't in the library, and im happy enough with that that i was
+hosting a demo instance back when i had a VM. i am not a security auditor,
+though, and with large compressed libraries and long uptimes, it might be
+possible to DOS a server, since friction extracts archives to a temporary
 directory and only removes them when you quit. if your library is all
 directories and no archives, though, you should be fine
 
