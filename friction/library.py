@@ -8,7 +8,7 @@ from urllib.parse import urlencode
 from zipfile import ZipFile, BadZipFile
 
 from PIL import Image
-from rarfile import RarFile, NotRarFile
+from rarfile import RarFile, NotRarFile, RarUnknownError
 
 try:
     from magic import from_file
@@ -23,7 +23,15 @@ def extract_zip(source, dest):
 
 
 def extract_rar(source, dest):
-    RarFile(source).extractall(dest)
+    rf = RarFile(source)
+    try:
+        rf.extractall(dest)
+    except RarUnknownError as e:
+        raise RuntimeError(
+            'got an error while extracting {f}:\n\n{error}\n\n'
+            'you may need to install `unrar` with your favourite package '
+            'manager'.format(f=source, error=e)
+        )
 
 
 RAR = 'application/x-rar'
