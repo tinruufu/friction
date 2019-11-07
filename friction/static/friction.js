@@ -13,7 +13,7 @@ function handleItems() {
 
   if (this.status >= 500) {
     document.title = 'aww jeez';
-    messengerElement.innerHTML = "sorry, something bad happened<br/><br/>the server has probably printed or logged more information<br/><br/>it'd be very nice if you could <a href='https://github.com/tinruufu/friction/issues'>file a bug</a> about this";
+    messengerElement.innerHTML = "sorry, something bad happened<br/><br/>you might have a bad archive in your library<br/><br/>the server has probably printed or logged more information<br/><br/>if the archive that caused this seems fine, it'd be very nice if you could <a href='https://github.com/tinruufu/friction/issues'>file a bug</a> about this<br/><br/><a href=.>i don't care, just load something</a>";
   }
 
   var resp = JSON.parse(this.responseText);
