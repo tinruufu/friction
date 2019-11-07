@@ -9,7 +9,7 @@ if version_info.major != 3 or version_info.minor < 5:
 
 setup(
     name='friction',
-    version='0.8',
+    version='0.9',
     description=(
         'a browser-based gallery viewer tailored for viewing large '
         'collections of pornographic manga'
@@ -17,6 +17,7 @@ setup(
     long_description=(
         'please visit the homepage: https://github.com/tinruufu/friction'
     ),
+    long_description_content_type='text/markdown',
     url='https://github.com/tinruufu/friction',
     author='ティン・ルーフ',
     author_email='tinruufu+pypi@gmail.com',
