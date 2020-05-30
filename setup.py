@@ -9,7 +9,7 @@ if version_info.major != 3 or version_info.minor < 5:
 
 setup(
     name='friction',
-    version='0.9',
+    version='1.0.0',
     description=(
         'a browser-based gallery viewer tailored for viewing large '
         'collections of pornographic manga'
@@ -32,7 +32,7 @@ setup(
     license='MIT',
     platforms=['any'],
     install_requires=[
-        'flask>=0.11,<0.12',
+        'flask>=1.1,<1.2',
         'pillow',
         'python-magic',
         'rarfile',
